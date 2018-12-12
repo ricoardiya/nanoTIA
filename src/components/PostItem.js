@@ -10,7 +10,7 @@ import RelatedPosts from './RelatedPosts';
 export class PostItem extends Component {
   componentDidMount() {
     this.props.getPostDetail(this.props.match.params.post);
-    let page_count = localStorage.getItem('page-count');
+    let page_count = sessionStorage.getItem('page-count');
     if (page_count === null) {
       page_count = 0
     } else {
@@ -18,7 +18,7 @@ export class PostItem extends Component {
         page_count = parseInt(page_count,10) + 1
       }
     }
-    localStorage.setItem('page-count', page_count);
+    sessionStorage.setItem('page-count', page_count);
   }
 
   render() {
@@ -43,7 +43,7 @@ export class PostItem extends Component {
             </span>
           )
         })
-        if (localStorage.getItem('page-count') === '5') {
+        if (sessionStorage.getItem('page-count') === '5') {
           paywalled =
             <div className="subscription">
               Support independent journalism. <br/>

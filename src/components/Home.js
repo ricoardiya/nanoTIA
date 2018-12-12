@@ -12,7 +12,7 @@ export class Home extends Component {
   render() {
     if (this.props.post === undefined) {
       return (
-        <div>loading...</div>
+        <div>Loading...</div>
       )
     } else {
       document.title = "nanoTIA"
