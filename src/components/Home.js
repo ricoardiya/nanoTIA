@@ -17,6 +17,11 @@ export class Home extends Component {
     window.addEventListener('scroll', this.handleScroll);
   }
 
+  componentWillUnmount() {
+    this.props.getPosts();
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
   handleScroll = (e) => {
     const bottom = e.target.scrollingElement.scrollHeight - e.target.scrollingElement.scrollTop === e.target.scrollingElement.clientHeight;
     if (bottom) {
@@ -36,7 +41,7 @@ export class Home extends Component {
     } else {
       document.title = "nanoTIA"
       return (
-        <div onScroll={this.handleScroll.bind(this)}>
+        <div onScroll={this.handleScroll.bind(this)} className="test">
           <PostList posts={this.props.post} />
         </div>
       )
