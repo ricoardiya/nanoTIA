@@ -1,5 +1,5 @@
 export function relatedPostsReducers(
-  state = {undefined},
+  state = {relatedPosts: {}},
   action,
 ) {
   switch (action.type) {

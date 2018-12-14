@@ -1,5 +1,5 @@
 export function postDetailReducers(
-  state = {undefined},
+  state = {postDetail: {}},
   action,
 ) {
   switch (action.type) {

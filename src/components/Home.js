@@ -34,7 +34,7 @@ export class Home extends Component {
   }
 
   render() {
-    if (this.props.post === undefined) {
+    if (this.props.post.length === 0) {
       return (
         <div>Loading...</div>
       )

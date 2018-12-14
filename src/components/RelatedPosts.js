@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
-import {NavLink} from 'react-router-dom';
+import PropTypes from 'prop-types'
+import {NavLink} from 'react-router-dom'
 import { connect } from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {getRelatedPosts} from '../actions/relatedPostsAction'
 
-export class RelatedPosts extends Component {
+class RelatedPosts extends Component {
   componentDidMount() {
     this.props.getRelatedPosts(this.props.postID);
   }
   render() {
     let posts;
-    if (this.props.relatedPosts !== undefined){
+    if (Object.keys(this.props.relatedPosts).length !== 0){
       posts = this.props.relatedPosts.posts.slice(0, 4).map(postArr => {
         const link = "/" + postArr.slug;
         return (
@@ -49,5 +50,9 @@ function mapDispatchToProps(dispatch) {
     dispatch,
   );
 }
+
+RelatedPosts.propTypes = {
+  relatedPosts: PropTypes.object.isRequired
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(RelatedPosts)

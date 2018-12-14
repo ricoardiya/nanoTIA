@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {getPostDetail} from '../actions/postDetailAction'
-import Moment from 'react-moment';
-import 'moment-timezone';
-import Avatar from './Avatar';
-import RelatedPosts from './RelatedPosts';
+import Moment from 'react-moment'
+import 'moment-timezone'
+import Avatar from './Avatar'
+import RelatedPosts from './RelatedPosts'
 
-export class PostItem extends Component {
+class PostItem extends Component {
   componentDidMount() {
     this.props.getPostDetail(this.props.match.params.post);
     let page_count = sessionStorage.getItem('page-count');
@@ -22,7 +23,7 @@ export class PostItem extends Component {
   }
 
   render() {
-    if (this.props.postDetail === undefined) {
+    if (Object.keys(this.props.postDetail).length === 0) {
       return (
         <div>Loading...</div>
       )
@@ -93,5 +94,9 @@ function mapDispatchToProps(dispatch) {
     dispatch,
   );
 }
+
+PostItem.propTypes = {
+  postDetail: PropTypes.object.isRequired
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostItem)

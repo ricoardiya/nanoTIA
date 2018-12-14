@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
-import {NavLink} from 'react-router-dom';
-import Moment from 'react-moment';
-import 'moment-timezone';
-import Avatar from './Avatar';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import {NavLink} from 'react-router-dom'
+import Moment from 'react-moment'
+import 'moment-timezone'
+import Avatar from './Avatar'
 
-import '../styles/postlist.css';
+import '../styles/postlist.css'
 
-export class PostList extends Component {
+class PostList extends Component {
   render() {
     const postList = this.props.posts.map(postArr => {
       const link = "/" + postArr.slug;
@@ -35,5 +36,9 @@ export class PostList extends Component {
     )
   }
 }
+
+PostList.propTypes = {
+  posts: PropTypes.array.isRequired
+};
 
 export default PostList

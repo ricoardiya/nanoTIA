@@ -1,5 +1,5 @@
 export function postReducers(
-  state = {undefined},
+  state = {post: []},
   action,
 ) {
   switch (action.type) {
