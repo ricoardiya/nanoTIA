@@ -12,6 +12,9 @@ class PostItem extends Component {
   componentDidMount() {
     this.props.getPostDetail(this.props.match.params.post);
     let page_count = sessionStorage.getItem('page-count');
+    let last_access = sessionStorage.getItem('last-access');
+    let expired_month = sessionStorage.getItem('expired-month');
+    let expired_year = sessionStorage.getItem('expired-year');
     if (page_count === null) {
       page_count = 0
     } else {
@@ -19,7 +22,35 @@ class PostItem extends Component {
         page_count = parseInt(page_count,10) + 1
       }
     }
+
+    last_access = new Date();
+
+    if (expired_month === null && expired_year === null) {
+      const expired = new Date();
+      expired_month = expired.getMonth();
+      expired_year = expired.getFullYear();
+    } else {
+      if (last_access.getFullYear() > expired_year) {
+        // RESET page count
+        const expired = new Date();
+        expired_month = expired.getMonth();
+        expired_year = expired.getFullYear();
+        page_count = 0;
+      } else if (last_access.getFullYear() <= expired_year) {
+        if (last_access.getMonth() > expired_month) {
+          // RESET page count
+          const expired = new Date();
+          expired_month = expired.getMonth();
+          expired_year = expired.getFullYear();
+          page_count = 0;
+        }
+      }
+    }
+
     sessionStorage.setItem('page-count', page_count);
+    sessionStorage.setItem('last-access', last_access);
+    sessionStorage.setItem('expired-month', expired_month);
+    sessionStorage.setItem('expired-year', expired_year);
   }
 
   render() {
