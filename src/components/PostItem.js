@@ -54,21 +54,21 @@ class PostItem extends Component {
   }
 
   render() {
-    if (Object.keys(this.props.postDetail).length === 0) {
+    if (this.props.postDetail.length === 0) {
       return (
         <div>Loading...</div>
       )
     } else {
-      if (this.props.match.params.post !== this.props.postDetail.posts[0].slug) {
+      if (this.props.match.params.post !== this.props.postDetail[0].slug) {
         return (
           <div>Loading...</div>
         )
       } else {
         let paywalled, paywalledClass;
         // SET BROWSER TITLE
-        document.title = this.props.postDetail.posts[0].title;
+        document.title = this.props.postDetail[0].title;
 
-        const category = this.props.postDetail.posts[0].categories.map((catArr) => {
+        const category = this.props.postDetail[0].categories.map((catArr) => {
           return (
             <span key={catArr.id}>
               {catArr.name.toUpperCase()}&nbsp;
@@ -94,18 +94,18 @@ class PostItem extends Component {
               {category}
             </div>
             <div>
-              <Avatar src={this.props.postDetail.posts[0].author.avatar_url} alt={this.props.postDetail.posts[0].author.display_name} />&nbsp;
-              <a href={this.props.postDetail.posts[0].author.author_url}>{this.props.postDetail.posts[0].author.display_name}</a>&nbsp;&middot;&nbsp;
-              <Moment fromNow>{this.props.postDetail.posts[0].date_gmt + `Z`}</Moment>&nbsp;&middot;&nbsp;
-              {this.props.postDetail.posts[0].read_time}&nbsp;min read
+              <Avatar src={this.props.postDetail[0].author.avatar_url} alt={this.props.postDetail[0].author.display_name} />&nbsp;
+              <a href={this.props.postDetail[0].author.author_url}>{this.props.postDetail[0].author.display_name}</a>&nbsp;&middot;&nbsp;
+              <Moment fromNow>{this.props.postDetail[0].date_gmt + `Z`}</Moment>&nbsp;&middot;&nbsp;
+              {this.props.postDetail[0].read_time}&nbsp;min read
             </div>
-            <h1>{this.props.postDetail.posts[0].title}</h1>
+            <h1>{this.props.postDetail[0].title}</h1>
             <div>
-              <img className="img-fluid" src={this.props.postDetail.posts[0].featured_image.source} alt={this.props.postDetail.posts[0].title}/>
+              <img className="img-fluid" src={this.props.postDetail[0].featured_image.source} alt={this.props.postDetail[0].title}/>
             </div>
-            <div className={paywalledClass} dangerouslySetInnerHTML={{ __html: this.props.postDetail.posts[0].content }}/>
+            <div className={paywalledClass} dangerouslySetInnerHTML={{ __html: this.props.postDetail[0].content }}/>
             {paywalled}
-            <RelatedPosts postID={this.props.postDetail.posts[0].id} />
+            <RelatedPosts postID={this.props.postDetail[0].id} />
           </div>
         )
       }
@@ -127,7 +127,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 PostItem.propTypes = {
-  postDetail: PropTypes.object.isRequired
+  postDetail: PropTypes.array.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostItem)
