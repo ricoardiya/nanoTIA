@@ -11,10 +11,10 @@ import RelatedPosts from './RelatedPosts'
 class PostItem extends Component {
   componentDidMount() {
     this.props.getPostDetail(this.props.match.params.post);
-    let page_count = sessionStorage.getItem('page-count');
-    let last_access = sessionStorage.getItem('last-access');
-    let expired_month = sessionStorage.getItem('expired-month');
-    let expired_year = sessionStorage.getItem('expired-year');
+    let page_count = localStorage.getItem('page-count');
+    let last_access = localStorage.getItem('last-access');
+    let expired_month = localStorage.getItem('expired-month');
+    let expired_year = localStorage.getItem('expired-year');
     if (page_count === null) {
       page_count = 0
     } else {
@@ -47,10 +47,10 @@ class PostItem extends Component {
       }
     }
 
-    sessionStorage.setItem('page-count', page_count);
-    sessionStorage.setItem('last-access', last_access);
-    sessionStorage.setItem('expired-month', expired_month);
-    sessionStorage.setItem('expired-year', expired_year);
+    localStorage.setItem('page-count', page_count);
+    localStorage.setItem('last-access', last_access);
+    localStorage.setItem('expired-month', expired_month);
+    localStorage.setItem('expired-year', expired_year);
   }
 
   render() {
@@ -75,7 +75,7 @@ class PostItem extends Component {
             </span>
           )
         })
-        if (sessionStorage.getItem('page-count') === '5') {
+        if (localStorage.getItem('page-count') === '5') {
           paywalled =
             <div className="subscription">
               Support independent journalism. <br/>
